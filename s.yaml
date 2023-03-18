@@ -1,0 +1,61 @@
+edition: 1.0.0
+name: web-framework-app
+access: 'fc-forrester'
+
+vars: # 全局变量
+  region: 'cn-hangzhou'
+  service:
+    name: 'forrester-hello-world-demo'
+    description: 'Serverless Devs Web Framework Service'
+    logConfig:
+      name: "forrester-hello-world-demo"
+      description: 'Forrester hello world demo.'
+      role: acs:ram::1348378242694825:role/aliyunfcdefaultrole
+      logConfig:
+        project: forrest-hello-world-demo
+        logstore: forrest-hello-world-demo
+        enableInstanceMetrics: false
+        enableRequestMetrics: false
+        logBeginRule: "DefaultRegex"
+
+services:
+  framework:
+    component: fc
+    actions:
+      pre-deploy:
+        - run: mvn package -DskipTests
+          path: ./code
+    props:
+      region: ${vars.region}
+      service: ${vars.service}
+      function:
+        name: 'appcenter-cicd-demo'
+        description: 'Serverless Devs Web Framework Function'
+        codeUri: ./code
+        runtime: custom
+        memorySize: 1024
+        timeout: 30
+        instanceConcurrency: 100
+        customRuntimeConfig:
+          command:
+            - java
+          args:
+            - '-jar'
+            - 'target/webframework.jar'
+      triggers:
+        - name: httpTrigger
+          type: http
+          config:
+            authType: anonymous
+            methods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - HEAD
+              - OPTIONS
+      customDomains:
+        - domainName: auto
+          protocol: HTTP
+          routeConfigs:
+            - path: /*
