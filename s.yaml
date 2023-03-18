@@ -2,21 +2,18 @@ edition: 1.0.0
 name: web-framework-app
 access: 'fc-forrester'
 
-vars: # 全局变量
+vars: # globals
   region: 'cn-hangzhou'
   service:
     name: 'forrester-hello-world-demo'
-    description: 'Serverless Devs Web Framework Service'
+    description: 'Forrester hello world demo.'
+    role: acs:ram::1348378242694825:role/aliyunfcdefaultrole
     logConfig:
-      name: "forrester-hello-world-demo"
-      description: 'Forrester hello world demo.'
-      role: acs:ram::1348378242694825:role/aliyunfcdefaultrole
-      logConfig:
-        project: forrest-hello-world-demo
-        logstore: forrest-hello-world-demo
-        enableInstanceMetrics: false
-        enableRequestMetrics: false
-        logBeginRule: "DefaultRegex"
+      project: forrest-hello-world-demo
+      logstore: forrest-hello-world-demo
+      enableInstanceMetrics: true
+      enableRequestMetrics: true
+      logBeginRule: "DefaultRegex"
 
 services:
   framework:
