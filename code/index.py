@@ -20,8 +20,8 @@ def index():
         <br/>
         <p>You can also quickly experience: <br/>
             • npm install @serverless-devs/s<br/>
-            • s init start-flask<br/>
-            • s deploy<br/>
+            • s init start-flask <br/>
+            • s deploy --use-local <br/>
             <br/>
             Powered by Serverless Devs!
         </p>
