@@ -5,7 +5,7 @@ access: "fc-forrester"
 vars: 
   region: "cn-beijing"
   service:
-    name: "forrester-hello-world-demo"
+    name: "forrester-hello-world-app-demo"
     description: 'Forrester hello world demo.'
     role: acs:ram::1348378242694825:role/aliyunfcdefaultrole
     logConfig:
